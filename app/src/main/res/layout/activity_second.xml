@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kenjxli.handlerbus.demo.SecondActivity">
+
+    <Button
+        android:id="@+id/postNow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="send to activity1" />
+
+    <Button
+        android:id="@+id/postDelay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postNow"
+        android:text="send to activity1 delay 2000ms" />
+
+</RelativeLayout>
