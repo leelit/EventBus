@@ -31,10 +31,13 @@ public class HandlerBus extends Handler {
     }
 
     public static void register(int type, OnBusCallBack callBack) {
-        collectors.register(type, callBack);
+        register(type, callBack, true);
     }
 
     public static void register(int type, OnBusCallBack callBack, boolean inMainThread) {
+        if (type <= 0) {
+            throw new RuntimeException("HandlerBus register error: your type must > 0");
+        }
         collectors.register(type, callBack, inMainThread);
     }
 

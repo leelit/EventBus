@@ -23,20 +23,12 @@ public class EventCollector {
     }
 
 
-    public synchronized void register(int type, OnBusCallBack callBack) {
-        this.register(type, callBack, true);
-    }
-
     /**
      * 重构，回调的线程应该在注册时确定，而不是在发送时确定
      *
      * @param inMainThread
      */
     public synchronized void register(int type, OnBusCallBack callBack, boolean inMainThread) {
-
-        if (type <= 0) {
-            throw new RuntimeException("HandlerBus register error: your type must > 0");
-        }
 
         List<CallBackParameter> list = typeRelativeEvents.get(type);
         if (list == null) {
@@ -78,7 +70,7 @@ public class EventCollector {
 
     public synchronized void post(Message msg) {
         final Event event = (Event) msg.obj;
-        final List<CallBackParameter> list = typeRelativeEvents.get(event.type);
+        List<CallBackParameter> list = typeRelativeEvents.get(event.type);
 
         if (list != null && list.size() > 0) {
 
