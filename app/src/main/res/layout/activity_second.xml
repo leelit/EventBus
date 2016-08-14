@@ -3,19 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context="com.kenjxli.handlerbus.demo.SecondActivity">
 
     <Button
-        android:id="@+id/postNow"
+        android:id="@+id/postSubThread"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="send to activity1" />
+        android:text="send to main_activity in sub thread" />
 
     <Button
         android:id="@+id/postDelay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/postNow"
-        android:text="send to activity1 delay 2000ms" />
+        android:layout_below="@id/postSubThread"
+        android:text="send to all delay 3000ms" />
 
 </RelativeLayout>

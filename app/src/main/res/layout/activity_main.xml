@@ -5,17 +5,62 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/secondActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="jump to Second Activity" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="this is MainActivity"
+            android:textColor="#FF0000" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/hello_world" />
+
+        <Button
+            android:id="@+id/sendToFragment1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send to fragment1" />
+
+        <Button
+            android:id="@+id/secondActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="jump to Second Activity" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal">
+
+        <fragment
+            android:id="@+id/fragment1"
+            android:name="com.kenjxli.handlerbus.demo.Fragment1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <fragment
+            android:id="@+id/fragment2"
+            android:name="com.kenjxli.handlerbus.demo.Fragment2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
 
 </LinearLayout>
