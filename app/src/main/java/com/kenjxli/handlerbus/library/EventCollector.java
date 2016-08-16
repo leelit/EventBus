@@ -17,6 +17,8 @@ public class EventCollector {
     private Map<Integer, List<CallBackParameter>> typeRelativeEvents = new HashMap<>();
     private ReferenceQueue<OnBusCallBack> referenceQueue = new ReferenceQueue<>();
 
+    private Map<Integer, Event.StickyEvent> stickyEvents = new HashMap<>();
+
     private static class CallBackParameter {
         WeakReference<OnBusCallBack> callback;
         boolean inMainThread;
@@ -29,6 +31,8 @@ public class EventCollector {
      * @param inMainThread
      */
     public synchronized void register(int type, OnBusCallBack callBack, boolean inMainThread) {
+
+        checkSticky(type, callBack, inMainThread); // 注册时检查这个事件是不是之前发送的sticky事件
 
         List<CallBackParameter> list = typeRelativeEvents.get(type);
         if (list == null) {
@@ -51,6 +55,27 @@ public class EventCollector {
 
     }
 
+    private void checkSticky(int type, final OnBusCallBack callBack, boolean inMainThread) {
+        if (stickyEvents.containsKey(type)) {
+            final Event.StickyEvent stickyEvent = stickyEvents.get(type);
+            long lastTime = stickyEvent.postTime;
+            if (System.currentTimeMillis() - lastTime <= stickyEvent.event.stickyMs) {
+                if (inMainThread) {
+                    callBack.onBusCall(stickyEvent.event);
+                } else {
+                    Executors.newCachedThreadPool().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            callBack.onBusCall(stickyEvent.event);
+                        }
+                    });
+                }
+            } else {
+                stickyEvents.remove(type);
+            }
+        }
+    }
+
     public synchronized void unregister(int type, OnBusCallBack callBack) {
         List<CallBackParameter> list = typeRelativeEvents.get(type);
 
@@ -68,8 +93,11 @@ public class EventCollector {
         }
     }
 
+
     public synchronized void post(Message msg) {
         final Event event = (Event) msg.obj;
+        saveStickyEvent(event);
+
         List<CallBackParameter> list = typeRelativeEvents.get(event.type);
 
         if (list != null && list.size() > 0) {
@@ -89,9 +117,19 @@ public class EventCollector {
                 }
             }
 
-
         }
 
+    }
+
+    private void saveStickyEvent(Event event) {
+        if (event.stickyMs > 0) {
+            Event.StickyEvent lastEvent = stickyEvents.get(event.type);
+            // 没有 || 选择sticky事件更长的
+            if (lastEvent == null || event.stickyMs > lastEvent.event.stickyMs) {
+                Event.StickyEvent stickyEvent = new Event.StickyEvent(event, System.currentTimeMillis());
+                stickyEvents.put(event.type, stickyEvent);
+            }
+        }
     }
 
     private void removeGcObj(List<CallBackParameter> list) {

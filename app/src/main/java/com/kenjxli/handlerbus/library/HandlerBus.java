@@ -38,6 +38,9 @@ public class HandlerBus extends Handler {
         if (type <= 0) {
             throw new RuntimeException("HandlerBus register error: your type must > 0");
         }
+        if (callBack == null) {
+            throw new RuntimeException("HandlerBus register error: you must have callback");
+        }
         collectors.register(type, callBack, inMainThread);
     }
 
@@ -54,12 +57,23 @@ public class HandlerBus extends Handler {
 
     public static void postDelay(Event event, int ms) {
         if (event == null) {
-            throw new RuntimeException("HandlerBus post error: event must not be null");
+            throw new RuntimeException("HandlerBus postDelay error: event must not be null");
         }
         if (ms <= 0) {
-            throw new RuntimeException("HandlerBus postSticky error: your have not set stickyMs parameter");
+            throw new RuntimeException("HandlerBus postDelay error: your have not set ms parameter");
         }
         bus.sendMessageDelayed(wrapEventToMessage(event), ms);
+    }
+
+    public static void postSticky(Event event,int ms){
+        if (event == null) {
+            throw new RuntimeException("HandlerBus postSticky error: event must not be null");
+        }
+        if (ms <= 0) {
+            throw new RuntimeException("HandlerBus postSticky error: your have not set ms parameter");
+        }
+        event.stickyMs = ms;
+        bus.sendMessage(wrapEventToMessage(event));
     }
 
     /**
