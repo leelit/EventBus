@@ -65,7 +65,7 @@ public class EventBusTest extends AndroidTestCase {
                 Log.e("ThreadMode", "current: " + Thread.currentThread().toString());
                 assertTrue(Thread.currentThread() != Looper.getMainLooper().getThread());
             }
-        }, ThreadMode.CURRENT);
+        }, ThreadMode.POST_THREAD);
 
         EventBus.post(createEvent(TYPE1));
         EventBus.post(createEvent(TYPE2));
@@ -99,7 +99,7 @@ public class EventBusTest extends AndroidTestCase {
                 }
                 Log.e("tag", Thread.currentThread().toString());
             }
-        }, ThreadMode.CURRENT);
+        }, ThreadMode.POST_THREAD);
         EventBus.postDelay(createEvent(TYPE1), 2000);
         postTime = System.currentTimeMillis();
         Thread.sleep(2100);

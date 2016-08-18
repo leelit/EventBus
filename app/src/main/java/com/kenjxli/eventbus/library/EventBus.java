@@ -89,7 +89,7 @@ public class EventBus {
                             }
                         });
                         break;
-                    case CURRENT:
+                    case POST_THREAD:
                         callBack.onBusCall(stickyEvent.event);
                         break;
                 }
@@ -150,7 +150,7 @@ public class EventBus {
                             }
                         });
                         break;
-                    case CURRENT:
+                    case POST_THREAD:
                         call(event, each);
                         break;
                 }
