@@ -1,4 +1,4 @@
-package com.kenjxli.handlerbus;
+package com.kenjxli.eventbus;
 
 import org.junit.Test;
 

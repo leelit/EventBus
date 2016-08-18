@@ -4,19 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context="com.kenjxli.handlerbus.demo.SecondActivity">
+    tools:context="com.kenjxli.eventbus.demo.SecondActivity">
 
     <Button
         android:id="@+id/postSubThread"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="send to main_activity in sub thread" />
+        android:text="post in sub thread" />
 
     <Button
         android:id="@+id/postDelay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/postSubThread"
-        android:text="send to all delay 3000ms" />
+        android:text="post to all delay 3000ms" />
+
+    <Button
+        android:id="@+id/postSticky"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postDelay"
+        android:text="post sticky event 3000ms" />
+
+    <TextView
+        android:id="@+id/stickyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postSticky"
+        android:layout_marginTop="10dp"
+        android:text="nothing" />
 
 </RelativeLayout>

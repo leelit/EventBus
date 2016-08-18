@@ -1,4 +1,4 @@
-package com.kenjxli.handlerbus.library;
+package com.kenjxli.eventbus.library;
 
 /**
  * Created by kenjxli on 2016/8/12.

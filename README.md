@@ -2,7 +2,7 @@
 
 ## **ScreenShot**
 
-![](https://github.com/leelit/HandlerBus/blob/master/art.gif)
+download the apk, and run...
 
 
 ## **Usage**

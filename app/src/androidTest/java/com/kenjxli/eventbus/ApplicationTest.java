@@ -1,4 +1,4 @@
-package com.kenjxli.handlerbus;
+package com.kenjxli.eventbus;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

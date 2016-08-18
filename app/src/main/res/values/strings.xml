@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">HandlerBus</string>
+    <string name="app_name">EventBus</string>
     <string name="hello_world">hello wrold</string>
 </resources>

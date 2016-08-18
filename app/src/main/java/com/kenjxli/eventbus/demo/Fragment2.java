@@ -1,4 +1,4 @@
-package com.kenjxli.handlerbus.demo;
+package com.kenjxli.eventbus.demo;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.kenjxli.handlerbus.R;
-import com.kenjxli.handlerbus.library.Event;
-import com.kenjxli.handlerbus.library.HandlerBus;
-import com.kenjxli.handlerbus.library.OnBusCallBack;
+import com.kenjxli.eventbus.R;
+import com.kenjxli.eventbus.library.Event;
+import com.kenjxli.eventbus.library.EventBus;
+import com.kenjxli.eventbus.library.OnBusCallBack;
 
 /**
  * Created by kenjxli on 2016/8/14.
@@ -25,8 +25,8 @@ public class Fragment2 extends Fragment implements OnBusCallBack {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        HandlerBus.register(EventType.FRAGMENT2_EVENT, this);
-        HandlerBus.register(EventType.DELAY_EVENT, this);
+        EventBus.register(EventType.FRAGMENT2_EVENT, this);
+        EventBus.register(EventType.DELAY_EVENT, this);
     }
 
     @Nullable
@@ -38,8 +38,8 @@ public class Fragment2 extends Fragment implements OnBusCallBack {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Event event = HandlerBus.createEvent(EventType.MAIN_ACTIVITY_EVENT, "message from fragment2");
-                HandlerBus.post(event);
+                Event event = EventBus.createEvent(EventType.MAIN_ACTIVITY_EVENT, "message from fragment2");
+                EventBus.post(event);
             }
         });
         return view;

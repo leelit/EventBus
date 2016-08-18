@@ -1,4 +1,4 @@
-package com.kenjxli.handlerbus.library;
+package com.kenjxli.eventbus.library;
 
 public interface OnBusCallBack {
 	

@@ -1,4 +1,4 @@
-package com.kenjxli.handlerbus.demo;
+package com.kenjxli.eventbus.demo;
 
 /**
  * Created by kenjxli on 2016/8/14.
@@ -9,4 +9,5 @@ public class EventType {
     public static final int FRAGMENT2_EVENT = FRAGMENT1_EVENT + 1;
     public static final int DELAY_EVENT = FRAGMENT2_EVENT + 1;
     public static final int SUB_THREAD_EVENT = DELAY_EVENT + 1;
+    public static final int STICKY_EVENT = SUB_THREAD_EVENT + 1;
 }

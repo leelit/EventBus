@@ -1,17 +1,15 @@
-package com.kenjxli.handlerbus.demo;
+package com.kenjxli.eventbus.demo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.kenjxli.handlerbus.R;
-import com.kenjxli.handlerbus.library.Event;
-import com.kenjxli.handlerbus.library.HandlerBus;
-import com.kenjxli.handlerbus.library.OnBusCallBack;
+import com.kenjxli.eventbus.R;
+import com.kenjxli.eventbus.library.Event;
+import com.kenjxli.eventbus.library.EventBus;
+import com.kenjxli.eventbus.library.OnBusCallBack;
 
 
 public class MainActivity extends AppCompatActivity implements OnBusCallBack, View.OnClickListener {
@@ -24,9 +22,8 @@ public class MainActivity extends AppCompatActivity implements OnBusCallBack, Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        HandlerBus.register(EventType.MAIN_ACTIVITY_EVENT, this);
-        HandlerBus.register(EventType.DELAY_EVENT, this);
-        HandlerBus.register(EventType.SUB_THREAD_EVENT, this, false);
+        EventBus.register(EventType.MAIN_ACTIVITY_EVENT, this);
+        EventBus.register(EventType.DELAY_EVENT, this);
 
         textView = (TextView) findViewById(R.id.textView);
 
@@ -45,15 +42,6 @@ public class MainActivity extends AppCompatActivity implements OnBusCallBack, Vi
                 textView.setText(msg.data.toString());
                 break;
 
-            case EventType.SUB_THREAD_EVENT:
-                final String currentThread = Thread.currentThread().toString();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        textView.setText("execute in: " + currentThread);
-                    }
-                });
-                break;
         }
     }
 
@@ -67,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements OnBusCallBack, Vi
                 break;
 
             case R.id.sendToFragment1:
-                Event event = HandlerBus.createEvent(EventType.FRAGMENT1_EVENT, "message from main_activity");
-                HandlerBus.post(event);
+                Event event = EventBus.createEvent(EventType.FRAGMENT1_EVENT, "message from main_activity");
+                EventBus.post(event);
                 break;
         }
     }
